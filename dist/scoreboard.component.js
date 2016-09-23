@@ -9,15 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var race_service_1 = require('./race.service');
+var scoreboarditem_component_1 = require('./scoreboarditem.component');
 var ScoreboardComponent = (function () {
-    function ScoreboardComponent() {
+    function ScoreboardComponent(raceService) {
+        this.raceService = raceService;
     }
+    ScoreboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.raceService.getRaces()
+            .subscribe(function (data) { return _this.races = data; });
+    };
     ScoreboardComponent = __decorate([
         core_1.Component({
             selector: "scoreboard",
-            template: "\n    <h1>Scoreboard</h1>\n  "
+            template: "\n    <header class=\"container\">\n    <h1>Scoreboard</h1>\n    <h3>Race Notifications</h3>\n    <ul>\n      <li></li>\n    </ul>\n    </header>\n\n    <div class=\"container-fluid scoreboard-display\">\n      <div class=\"row\">\n        <div class=\"col-xs-4\" *ngFor=\"let race of races\">\n          <scoreboard-item [race]=\"race\"></scoreboard-item>\n        </div>\n      </div>\n    </div>\n  ",
+            directives: [scoreboarditem_component_1.ScoreboardItemComponent],
+            providers: [race_service_1.RaceService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [race_service_1.RaceService])
     ], ScoreboardComponent);
     return ScoreboardComponent;
 }());
