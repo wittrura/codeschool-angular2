@@ -14,6 +14,7 @@ var scoreboarditem_component_1 = require('./scoreboarditem.component');
 var ScoreboardComponent = (function () {
     function ScoreboardComponent(raceService) {
         this.raceService = raceService;
+        this.notifications = [];
     }
     ScoreboardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -23,7 +24,7 @@ var ScoreboardComponent = (function () {
     ScoreboardComponent = __decorate([
         core_1.Component({
             selector: "scoreboard",
-            template: "\n    <header class=\"container\">\n    <h1>Scoreboard</h1>\n    <h3>Race Notifications</h3>\n    <ul>\n      <li></li>\n    </ul>\n    </header>\n\n    <div class=\"container-fluid scoreboard-display\">\n      <div class=\"row\">\n        <div class=\"col-xs-4\" *ngFor=\"let race of races\">\n          <scoreboard-item [race]=\"race\"></scoreboard-item>\n        </div>\n      </div>\n    </div>\n  ",
+            template: "\n    <header class=\"container\">\n    <h1>Scoreboard</h1>\n    <h3>Race Notifications</h3>\n    <ul>\n      <li *ngFor=\"let notification of notifications\">{{notification}}</li>\n    </ul>\n    </header>\n\n    <div class=\"container-fluid scoreboard-display\">\n      <div class=\"row\">\n        <div class=\"col-xs-4\" *ngFor=\"let race of races\">\n          <scoreboard-item [race]=\"race\" (notification)='notifications.unshift($event)'></scoreboard-item>\n        </div>\n      </div>\n    </div>\n  ",
             directives: [scoreboarditem_component_1.ScoreboardItemComponent],
             providers: [race_service_1.RaceService]
         }), 

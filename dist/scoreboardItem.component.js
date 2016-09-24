@@ -19,7 +19,10 @@ var ScoreboardItemComponent = (function () {
     ScoreboardItemComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.raceScoreService.getScoreForRace(this.race.id)
-            .subscribe(function (data) { return _this.score = data; });
+            .subscribe(function (data) {
+            _this.checkForNotification(data);
+            _this.score = data;
+        });
     };
     ScoreboardItemComponent.prototype.checkForNotification = function (newScore) {
         if (newScore.currentLap >= newScore.totalLaps) {

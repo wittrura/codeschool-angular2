@@ -38,7 +38,9 @@ export class ScoreboardItemComponent {
 
   ngOnInit() {
     this.raceScoreService.getScoreForRace(this.race.id)
-        .subscribe(data => this.score = data);
+        .subscribe(data => {
+          this.checkForNotification(data);
+          this.score = data});
   }
 
   checkForNotification(newScore){
